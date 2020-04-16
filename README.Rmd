@@ -42,7 +42,16 @@ This is a basic example which shows you how to solve a common problem:
 
 ```{r example}
 library(varnames)
+library(tidyverse)
 ## basic example code
+
+create_var_names(var_name = "pds", str = "s", n = 2, unlist = T) %>% 
+  add_specifier(str = "i", n = 3, sort = "previous", unlist = F) 
+
+create_var_names(var_name = "pds", str = "s", n = 2, unlist = T) %>% 
+  add_specifier(str = "i", n = 3, sort = "current", unlist = T) %>% 
+  add_specifier(str = "t", n = 4, sort = "current", unlist = F)
+  
 ```
 
 
