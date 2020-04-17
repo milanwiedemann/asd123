@@ -54,6 +54,15 @@ create_var_names(var_name = "pds", str = "s", n = 2, unlist = T) %>%
   
 ```
 
+Just realised something like this may be way simpler
+
+```{r}
+library(tidyverse)
+paste0("pds", "_", "s", 1:10) %>% 
+  paste0("_",  "i", 1:4)
+
+```
+
 
 ### Create variable names
 

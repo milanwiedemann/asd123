@@ -74,6 +74,16 @@ create_var_names(var_name = "pds", str = "s", n = 2, unlist = T) %>%
 #> [6] "pds_s2_i3_t4"
 ```
 
+Just realised something like this may be way simpler
+
+``` r
+library(tidyverse)
+paste0("pds", "_", "s", 1:10) %>% 
+  paste0("_",  "i", 1:4)
+#>  [1] "pds_s1_i1"  "pds_s2_i2"  "pds_s3_i3"  "pds_s4_i4"  "pds_s5_i1" 
+#>  [6] "pds_s6_i2"  "pds_s7_i3"  "pds_s8_i4"  "pds_s9_i1"  "pds_s10_i2"
+```
+
 ### Create variable names
 
 ### Rename variables
