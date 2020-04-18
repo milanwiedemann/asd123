@@ -12,24 +12,16 @@ status](https://travis-ci.com/milanwiedemann/varnames.svg?branch=master)](https:
 <!-- badges: end -->
 
 The goal of `varnames` is to help with creating consistent variable
-names. This has many advantages, even if no further calculations of the
-data are needed.
-
-Consistent variable names are particularly helpful when managing larger
-datasets. Below I some examples how consistent variable names help when
-combined with other useful tools like [Regular
+names. Good variable names have many advantages, particularly when
+managing larger datasets. I show some examples how consistent names of
+variable can be really powerful because it’s easier to automate things
+and use [Regular
 Expressions](https://stringr.tidyverse.org/articles/regular-expressions.html).
 
 ## Installation
 
-You can install the released version of varnames from
-[CRAN](https://CRAN.R-project.org) with:
-
-``` r
-install.packages("varnames")
-```
-
-And the development version from [GitHub](https://github.com/) with:
+This is work in progress, the development version from
+[GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("devtools")
@@ -38,8 +30,10 @@ devtools::install_github("milanwiedemann/varnames")
 
 ## Example
 
-For most cases there might be a very simple solution in creating
-consistent variable names using the `paste()` function.
+For most cases there might be a very easy way to create consistent
+variable names simply by using the `paste()` function. This function
+comes with base R which means that no further packages are needed and it
+is very flexible\!
 
 ``` r
 # Create vector of a measure with 3 time points (t)
@@ -48,14 +42,9 @@ paste("measure_", "t", 1:3, sep = "")
 ```
 
 Sometimes more than one specification need to be added to a variable
-name. Say something about “wide” data. Allthough this is not the best
-way to store data
-\[@Wickham2013\](<https://www.jstatsoft.org/article/view/v059i10>), it
-is often how data looks like. In the examples below I’m showing how data
-stored in these variable names can be transformend into “long” data.
-
-Similar to the example above, the `create_var_names()` function creates
-a vector (or list) of consistent variable names.
+name. Similar to the example above, the `create_var_names()` function
+creates a vector (or list) of a measure with 3 time points (“t”)
+specified in the arguments `str = "t"` and `n = 3`.
 
 ``` r
 library(varnames)
@@ -81,14 +70,15 @@ create_var_names(var_name = "measure", str = "t", n = 3)
 #> [1] "measure_t3"
 ```
 
-The `add_specifier()` function adds a specifier, here “i” to the
-variables created in the step before. A feature of this function is that
-variable names can be returend in different ways, depending on what
-output format is most suitable for further use.
+The `add_specifier()` function adds a further specification to the
+variables created in the step before, here `"i"` for item. Depending on
+what output format is most suitable for further use, this function can
+return the output in different ways.
 
-The example below adds two indicators “i” for each time point “t” and
-returns a list that is sorted by the specifyer added created initially
-“t”.
+The example below adds two items “i” for each time point “t” and returns
+a list that is sorted by the output format from the previous function
+using `sort = "previous"`. This creates a list with 3 vectors, one for
+each time point specified in the previous function.
 
 ``` r
 create_var_names(var_name = "measure", str = "t", n = 3) %>% 
@@ -103,9 +93,9 @@ create_var_names(var_name = "measure", str = "t", n = 3) %>%
 #> [1] "measure_t3_i1" "measure_t3_i2"
 ```
 
-The output list can also be sorted according to the second specifyer
-that is added by using the argument `sort = "current"`. Now a list with
-two elements gets returned, one for each indicator that was added.
+The output list can also be sorted by the new specifyer that was added
+by using the argument `sort = "current"`. Now a list with two vectors is
+returned, one vector for each indicator that was added.
 
 ``` r
 create_var_names(var_name = "measure", str = "t", n = 3) %>% 
@@ -117,8 +107,7 @@ create_var_names(var_name = "measure", str = "t", n = 3) %>%
 #> [1] "measure_t1_i2" "measure_t2_i2" "measure_t3_i2"
 ```
 
-If the desired output is a vactor of all variables the argument `unlist
-= TRUE` can be used.
+A list can be returned using the argument `unlist = TRUE`.
 
 ``` r
 create_var_names(var_name = "measure", str = "t", n = 3) %>% 
@@ -127,7 +116,8 @@ create_var_names(var_name = "measure", str = "t", n = 3) %>%
 #> [5] "measure_t2_i2" "measure_t3_i2"
 ```
 
-The order of the vector can still be changed by the sort argument.
+The order of the vector can still be changed when using `unlist = TRUE`
+by changing the sort argument.
 
 ``` r
 create_var_names(var_name = "measure", str = "t", n = 3) %>% 
@@ -138,6 +128,10 @@ create_var_names(var_name = "measure", str = "t", n = 3) %>%
 
 ## TODOS
 
+  - Say something about “tidy” data
+    \[@Wickham2013\](<https://www.jstatsoft.org/article/view/v059i10>)
+  - In the examples below I’m showing how data stored in these variable
+    names can be transformend into “long” data.
   - Add Why is this so useful? Show some examples, regular expressions
     automation etc
   - Add rename functions
