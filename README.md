@@ -13,9 +13,13 @@ status](https://travis-ci.com/milanwiedemann/varnames.svg?branch=master)](https:
 
 The goal of `varnames` is to help with creating consistent variable
 names. Good variable names have many advantages, particularly when
-managing larger datasets. I show some examples how consistent names of
-variable can be really powerful because it’s easier to automate things
-and use [Regular
+managing larger datasets.
+
+Consistent names make also make it easier to transform data sets to
+“tidy data”, see [Wickham
+(2013)](https://www.jstatsoft.org/article/view/v059i10). I’ll show some
+examples how consistent variable names can be really powerful because
+it’s easier to automate things and use [Regular
 Expressions](https://stringr.tidyverse.org/articles/regular-expressions.html).
 
 ## Installation
@@ -30,6 +34,8 @@ devtools::install_github("milanwiedemann/varnames")
 
 ## Example
 
+### Base R
+
 For most cases there might be a very easy way to create consistent
 variable names simply by using the `paste()` function. This function
 comes with base R which means that no further packages are needed and it
@@ -42,9 +48,14 @@ paste("measure_", "t", 1:3, sep = "")
 ```
 
 Sometimes more than one specification need to be added to a variable
-name. Similar to the example above, the `create_var_names()` function
-creates a vector (or list) of a measure with 3 time points (“t”)
-specified in the arguments `str = "t"` and `n = 3`.
+name. This is still possible using base function but it gets a bit
+tricky so I build functions that help with this.
+
+### varnames R package
+
+Similar to the example above, the `create_var_names()` function creates
+a vector (or list) of a measure with 3 time points (“t”) specified in
+the arguments `str = "t"` and `n = 3`.
 
 ``` r
 library(varnames)
@@ -59,15 +70,8 @@ library(tidyverse)
 #> x dplyr::lag()    masks stats::lag()
 
 # Create vector of a measure with 3 time points (t)
-create_var_names(var_name = "measure", str = "t", n = 3)
-#> [[1]]
-#> [1] "measure_t1"
-#> 
-#> [[2]]
-#> [1] "measure_t2"
-#> 
-#> [[3]]
-#> [1] "measure_t3"
+create_var_names(var_name = "measure", str = "t", n = 3, unlist = T)
+#> [1] "measure_t1" "measure_t2" "measure_t3"
 ```
 
 The `add_specifier()` function adds a further specification to the
@@ -126,7 +130,7 @@ create_var_names(var_name = "measure", str = "t", n = 3) %>%
 #> [5] "measure_t3_i1" "measure_t3_i2"
 ```
 
-## TODOS
+## TODOs
 
   - Say something about “tidy” data
     \[@Wickham2013\](<https://www.jstatsoft.org/article/view/v059i10>)
