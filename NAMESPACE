@@ -2,4 +2,3 @@
 
 export(add_specifier)
 export(create_var_names)
-export(create_var_names2)

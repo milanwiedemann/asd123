@@ -2,19 +2,19 @@
 % Please edit documentation in R/create-var-names.R
 \name{add_specifier}
 \alias{add_specifier}
-\title{Title}
+\title{Add further specifications to variable names}
 \usage{
 add_specifier(
-  varnames,
+  var_names,
   str = "i",
   n,
-  sort = c("str1", "str2"),
+  sort = c("previous", "current"),
   name_index = FALSE,
   unlist = FALSE
 )
 }
 \arguments{
-\item{varnames}{}
+\item{var_names}{List or vector of variable names}
 
 \item{str}{}
 
@@ -30,5 +30,5 @@ add_specifier(
 
 }
 \description{
-Title
+Add further specifications to variable names
 }
