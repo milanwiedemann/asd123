@@ -91,12 +91,14 @@ The order of the vector can still be changed when using `unlist = TRUE` by chang
 
 ```{r example-add-4}
 create_var_names(var_name = "measure", str = "t", n = 3) %>% 
-  add_specifier(str = "i", n = 2, sort = "previous", unlist = TRUE)
+  add_specifier(str = "i", n = 2, sort = "previous", unlist = F)
 ```
+
 
 ## TODOs
 
-- Say something about "tidy" data [@Wickham2013](https://www.jstatsoft.org/article/view/v059i10)
+- Say something about "tidy" data [Wickham2013](https://www.jstatsoft.org/article/view/v059i10)
+- Take a closer look at the bad data guide https://github.com/Quartz/bad-data-guide
 - In the examples below I'm showing how data stored in these variable names can be transformend into "long" data.
 - Add Why is this so useful? Show some examples, regular expressions automation etc
 - Add rename functions
