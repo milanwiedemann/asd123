@@ -3,4 +3,5 @@
 export("%>%")
 export(add_specifier)
 export(create_var_names)
+export(rename_item_vars)
 importFrom(magrittr,"%>%")
