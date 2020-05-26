@@ -8,15 +8,23 @@ add_specifier(
   var_names,
   str = "i",
   n,
+  sep = "_",
   sort = c("previous", "current"),
-  name_index = FALSE,
   unlist = FALSE
 )
 }
 \arguments{
-\item{var_names}{List or vector of variable names}
+\item{var_names}{List or vector of variable names created using the \code{\link[varnames]{create_var_names}} function}
 
-\item{unlist}{}
+\item{str}{String, specifying the suffix to be added after the input string from \code{var_names}.}
+
+\item{n}{Numeric, specifying the number of variables.}
+
+\item{sep}{String, specifying the sep between  string from \code{var_names} and \code{str}.}
+
+\item{sort}{String, specifying whether to arrange the output based on the \code{"previous"} or \code{"current"} function.}
+
+\item{unlist}{Logical, specifying whether a "list" or "vector" should be returned.}
 }
 \value{
 

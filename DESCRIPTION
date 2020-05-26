@@ -1,6 +1,6 @@
 Package: varnames
-Title: Create Variable Names
-Version: 0.0.0.9000
+Title: Create Consistent Variable Names for Repeated Measures
+Version: 0.0.0.9001
 Authors@R: 
     person(given = "Milan",
            family = "Wiedemann",

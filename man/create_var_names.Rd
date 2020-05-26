@@ -15,7 +15,7 @@ create_var_names(var_name, str = "s", n, sep = "_", unlist = FALSE)
 
 \item{sep}{String, specifying the seperatpr between \code{var_name} and \code{str}.}
 
-\item{unlist}{Logical, specifying whether a list or vactor should be returned.}
+\item{unlist}{Logical, specifying whether a "list" or "vector" should be returned.}
 }
 \value{
 
