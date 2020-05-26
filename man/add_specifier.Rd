@@ -16,14 +16,6 @@ add_specifier(
 \arguments{
 \item{var_names}{List or vector of variable names}
 
-\item{str}{}
-
-\item{n}{}
-
-\item{sort}{}
-
-\item{name_index}{}
-
 \item{unlist}{}
 }
 \value{

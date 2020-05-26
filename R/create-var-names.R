@@ -11,45 +11,65 @@
 #'
 #' @examples
 create_var_names <- function(var_name, str = "s", n, sep = "_", unlist = FALSE) {
-  
+
   # Create string with variable names inclusing session ---
-  return_list <- purrr::map2(.x = base::rep(base::paste(var_name, str, sep = "_"), n), .y = 1:n, .f = base::paste0)
+  var_names_list <- purrr::map2(.x = base::rep(base::paste(var_name, str, sep = "_"), n), .y = 1:n, .f = base::paste0)
 
   # Unlist argument ----
   # No functionality to use names
   if (unlist == TRUE) {
-    unlist(return_list, use.names = FALSE)
+
+    var_names_unlist <- unlist(var_names_list, use.names = FALSE)
+
+    class(var_names_unlist) <- "create_varnames"
+
+    return(var_names_unlist)
+
   } else if (unlist == FALSE) {
-    return_list
+
+    class(var_names_list) <- "create_varnames"
+
+    return(var_names_list)
+
   }
 }
 
 #' Add further specifications to variable names
 #'
-#' @param var_names List or vector of variable names 
-#' @param str 
-#' @param n 
-#' @param sort 
-#' @param name_index 
-#' @param unlist 
+#' @param var_names List or vector of variable names
+#' @param str
+#' @param n
+#' @param sort
+#' @param name_index
+#' @param unlist
 #'
 #' @return
 #' @export
 #'
 #' @examples
 add_specifier <- function(var_names, str = "i", n, sort = c("previous", "current"), name_index = FALSE, unlist = FALSE) {
-  
+
+  # First test if a specifier was already added
+  if (inherits(var_names, "varnames_and_specifier") == TRUE) {
+    stop("Only one specifier can be added.", call. = FALSE)
+  }
+
+  # Next test if  var_names was created with create_var_names() function
+  if (inherits(var_names, "create_varnames") == FALSE) {
+    stop("Object specified in 'var_names' was not created using 'create_var_names()' function.", call. = FALSE)
+  }
+
   # Check input of sort arguemtn
   sort <- base::match.arg(sort)
-  
+
   # Count length of input
   # I need to change this so it can also count vectors within lists
   n_varnames <- length(var_names)
-  
+
   # Add string ----
   str_temp <- purrr::map2(.x = base::rep(base::paste(var_names, str, sep = "_"), n), .y = rep(1:n, each = n_varnames), .f = base::paste0)
   str_temp <-  base::unlist(str_temp, use.names = FALSE)
-  
+
   # Create list 1 ----
   # one element per list for n_varnames
   return_list_1 <- list()
@@ -80,7 +100,9 @@ add_specifier <- function(var_names, str = "i", n, sort = c("previous", "current
   # Return list sorted by n_varnames or n
   # Depending on unlist argument each sort element will be a separate list
   if (sort == "previous") {
+
     return_list <- return_list_1
+
   } else if (sort == "current") {
     return_list <- return_list_2
   }
@@ -88,8 +110,18 @@ add_specifier <- function(var_names, str = "i", n, sort = c("previous", "current
   # Unlist argument ----
   # No functionality to use names
   if (unlist == TRUE) {
-    unlist(return_list, use.names = FALSE)
+
+    return_unlist <- unlist(return_list, use.names = FALSE)
+
+    class(return_unlist) <- "varnames_and_specifier"
+
+    return(return_unlist)
+
   } else if (unlist == FALSE) {
-    return_list
+
+    class(return_list) <- "varnames_and_specifier"
+
+    return(return_list)
+
   }
 }
