@@ -3,7 +3,7 @@
 #' @param var_name String, specifying the variable name.
 #' @param str String, specifying the suffix to be added after the \code{var_name}.
 #' @param n Numeric, specifying the number of variables.
-#' @param sep String, specifying the seperatpr between \code{var_name} and \code{str}.
+#' @param sep String, specifying the separator between \code{var_name} and \code{str}.
 #' @param unlist Logical, specifying whether a "list" or "vector" should be returned.
 #'
 #' @return
@@ -12,7 +12,7 @@
 #' @examples
 create_var_names <- function(var_name, str = "s", n, sep = "_", unlist = FALSE) {
 
-  # Create string with variable names inclusing session ---
+  # Create string with variable names including session ---
   var_names_list <- purrr::map2(.x = base::rep(base::paste(var_name, str, sep = sep), n), .y = 1:n, .f = base::paste0)
 
   # Unlist argument ----
@@ -21,13 +21,13 @@ create_var_names <- function(var_name, str = "s", n, sep = "_", unlist = FALSE) 
 
     var_names_unlist <- unlist(var_names_list, use.names = FALSE)
 
-    class(var_names_unlist) <- "create_varnames"
+    class(var_names_unlist) <- c("character") # create_varnames
 
     return(var_names_unlist)
 
   } else if (unlist == FALSE) {
 
-    class(var_names_list) <- "create_varnames"
+    class(var_names_list) <-  c("character") # create_varnames
 
     return(var_names_list)
 
@@ -53,14 +53,14 @@ add_specifier <- function(var_names, str = "i", n, sep = "_", sort = c("previous
   # name_index = FALSE
 
   # First test if a specifier was already added
-  if (inherits(var_names, "varnames_and_specifier") == TRUE) {
-    stop("Only one specifier can be added.", call. = FALSE)
-  }
-
-  # Next test if  var_names was created with create_var_names() function
-  if (inherits(var_names, "create_varnames") == FALSE) {
-    stop("Object specified in 'var_names' was not created using 'create_var_names()' function.", call. = FALSE)
-  }
+  # if (inherits(var_names, "varnames_and_specifier") == TRUE) {
+  #   stop("Only one specifier can be added.", call. = FALSE)
+  # }
+  #
+  # # Next test if  var_names was created with create_var_names() function
+  # if (inherits(var_names, "create_varnames") == FALSE) {
+  #   stop("Object specified in 'var_names' was not created using 'create_var_names()' function.", call. = FALSE)
+  # }
 
   # Check input of sort arguemtn
   sort <- base::match.arg(sort)
@@ -117,13 +117,13 @@ add_specifier <- function(var_names, str = "i", n, sep = "_", sort = c("previous
 
     return_unlist <- unlist(return_list, use.names = FALSE)
 
-    class(return_unlist) <- "varnames_and_specifier"
+    class(return_unlist) <- c("character") #varnames_and_specifier
 
     return(return_unlist)
 
   } else if (unlist == FALSE) {
 
-    class(return_list) <- "varnames_and_specifier"
+    class(return_list) <- c("character") #varnames_and_specifier
 
     return(return_list)
 

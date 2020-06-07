@@ -13,7 +13,7 @@ create_var_names(var_name, str = "s", n, sep = "_", unlist = FALSE)
 
 \item{n}{Numeric, specifying the number of variables.}
 
-\item{sep}{String, specifying the seperatpr between \code{var_name} and \code{str}.}
+\item{sep}{String, specifying the separator between \code{var_name} and \code{str}.}
 
 \item{unlist}{Logical, specifying whether a "list" or "vector" should be returned.}
 }
